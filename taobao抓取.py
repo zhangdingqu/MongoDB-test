@@ -250,7 +250,7 @@ def main():
         get_products()
         next_page()
 
-    input('haha')
+    input('haha ')
 
 if __name__ == '__main__':
     main()
