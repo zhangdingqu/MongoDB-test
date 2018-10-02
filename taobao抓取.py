@@ -7,15 +7,23 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
 from selenium.webdriver.common.action_chains import ActionChains
-from config import *
+from config import writer,KEYWORDS
 import time
+
+a=writer()
+IP=a.get_ip()
+
+chromeOptions = webdriver.ChromeOptions()
+chromeOptions.add_argument("--proxy-server=http://"+IP)
+
 '''先判断元素是否存在[EC.presence_of_element_located]
    判断元素是否是可点击[EC.element_to_be_clickable]
    
    '''
 
+
 driver_list = ['1', '2']
-driver_list[0] = webdriver.Chrome()
+driver_list[0] = webdriver.Chrome(chrome_options = chromeOptions)
 d_f_e = driver_list[0].find_element
 
 #是否存在方法
@@ -38,7 +46,6 @@ def values(driver,value):
         print(value,'元素未加载成功，等待超时')
 
 
-
 # 根据关键字查询初始化
 def search():
     wait = WebDriverWait(driver_list[0], 10)
@@ -47,6 +54,11 @@ def search():
     driver_list[0].get('http://www.taobao.com')
     #检查搜索框是不是已经加载出来
     input_search=EC_located('#q')
+    while input_search==None:
+        print('网页打开异常,重试..')
+        off_sta()
+        input_search = EC_located('#q')
+
     input_search.send_keys(KEYWORDS)#输入美食
     #检查按钮是否是可点击的
     submit_button=EC_located('.btn-search.tb-bg')
@@ -83,6 +95,8 @@ def next_page():
 
 def off_sta():
     # 先预先记录本页url地址，以备后面翻页失败后重启调用url
+    global IP
+    IP = a.get_ip()
     u_r_l[0] = driver_list[0].current_url
     '''关闭重试'''
     try:
@@ -90,9 +104,17 @@ def off_sta():
     except:
         pass
     print('正在重启浏览器')
-    driver_list[0] = webdriver.Chrome()
+    chromeOptions = webdriver.ChromeOptions()
+    chromeOptions.add_argument("--proxy-server=http://" + IP)
+    driver_list[0] = webdriver.Chrome(chrome_options = chromeOptions)
     driver_list[0].get(u_r_l[0])
-    next_page()
+    if EC_located('.submit') !=None:
+        return
+        # next_page()
+    elif EC_located('.btn-search') !=None:
+        return
+    else:
+        off_sta()
 
 
 page=['haha','xixi']
@@ -125,7 +147,6 @@ def by_css(items,value):
     css_value=items.find_element(By.CSS_SELECTOR,value)
     return css_value
 # 获取一页上所有的商品
-
 def get_products():
     style_ads = ''
     shop_lis = ''
@@ -135,8 +156,10 @@ def get_products():
     for i in items:
         # 提取标题
         title=by_css(i, '.ctx-box a.J_ClickStat').text
+        a.dict.update({'标题':title})#@@@@@@@@@@@@@@@@@@@
         # 提取链接
         ctx_box_url = by_css(i, '.ctx-box a.J_ClickStat').get_attribute('href')
+        a.dict.update({'链接': ctx_box_url})#@@@@@@@@@@@@@@@@@@@
         print(title,ctx_box_url)
         icons=values(i,'.icons span')
         #提取服务项目
@@ -155,21 +178,29 @@ def get_products():
 
                 shop_lis=shop_lis+sls+','
             print(shop_lis)#@@@@@@@@@
+            a.dict.update({'服务': shop_lis})
         except:
             pass
         #提取DSR状态
+        dsr_w1=''
         dsrs=values(i,'.dsrs .dsr')
         for dsr in dsrs:
-            print(str(dsr.get_attribute('class')).replace('dsr morethan','红').replace('dsr lessthan','蓝').replace('dsr equalthan','黄'))#@@@@@@@@@
+            dsr_w=str(dsr.get_attribute('class')).replace('dsr morethan','红').replace('dsr lessthan','蓝').replace('dsr equalthan','黄')#@@@@@@@@@
+            dsr_w1=dsr_w1+dsr_w
+        print(dsr_w1)
+        a.dict.update({'dsr':dsr_w1})#@@@@@@@@@@@@
         # 提取店铺名
         shopname = by_css(i, '.dsrs+span').text#@@@@@@@@@
+        a.dict.update({'店铺名': shopname})
         # 提取价格
         price=by_css(i, '.price strong').text#@@@@@@@@@
+        a.dict.update({'价格': price})
         # 提取付款人数
         deal = by_css(i, ' .deal-cnt').text#@@@@@@@@@
+        a.dict.update({'付款人数': deal})
         #发货地
         location=by_css(i, ' .location').text#@@@@@@@@@
-
+        a.dict.update({'发货地': location})
         #盒子DIV展开部分提取
         #1.鼠标放到上面
         EC_located('.shopname')
@@ -180,36 +211,67 @@ def get_products():
         div_class=EC_located('.srp-popup.srp-overlay').get_attribute('class')
         div_class = EC_located('.srp-popup.srp-overlay').get_attribute('class')
         #判断盒子正常
+        hz=0
         while 'hidden' in div_class or style_ads==map_style:
             Action(i, '.shopname')
+            time.sleep(0.5)
             map_style = EC_located('.srp-popup.srp-overlay').get_attribute('style')
             div_class = EC_located('.srp-popup.srp-overlay').get_attribute('class')
+            hz+=1
+            if hz>30:
+                hz=0
+                off_sta()
 
         #获取店铺div盒子里面的店铺信息集合
         EC_located('.shop-main .rank-box span')
         value = True
-        shop_widgets=''
+        shop_widgets = ''
+        level=1
         while value == True:
             try:
                 shop_mains = values(driver_list[0], '.shop-main .rank-box span')
                 for shop_widget in shop_mains:
                     shop_widgets1=shop_widget.get_attribute('class')
                     shop_widgets=shop_widgets+shop_widgets1+','
-                print(shop_widgets)#@@@@@@@@@
+                print(shop_widgets)
+                #店铺等级解析
+                shop_widgets_list=shop_widgets.split(',')
+                for widget_for in shop_widgets_list:
+                    print(widget_for)
+                    if widget_for=='icon-service-qiye-large':
+                        a.dict.update({'店铺类型':'企业店铺'})
+                    elif widget_for=='icon-service-tianmao-large':
+                        a.dict.update({'店铺类型':'天猫店'})
+                    elif widget_for=='icon icon-supple-level-xin':
+                        a.dict.update({'店铺等级':str(level)+'心'})
+                        level+=1
+                    elif widget_for=='icon icon-supple-level-zuan':
+                        a.dict.update({'店铺等级':str(level)+'钻'})
+                        level+=1
+                    elif widget_for=='icon icon-supple-level-guan':
+                        a.dict.update({'店铺等级':str(level)+'冠'})
+                        level+=1
+                    elif widget_for=='icon icon-supple-level-jinguan':
+                        a.dict.update({'店铺等级':str(level)+'金冠'})
+                        level+=1
+                    elif a.dict['店铺类型']=='':
+                        a.dict.update({'店铺类型':'淘宝c店'})
+
                 value = False
-                shop_widgets=''
+
             except:
                 time.sleep(0.8)
                 print('调试信息1...')
                 value == True
 #=============================================
         if '天猫' in shop_lis:
-            pass
+            a.dict.update({'店铺等级':'','好评率': ''})
         else:
             try:#好评率
                 Action(i, '.shopname')
                 good=EC_located('.rate').text
                 print(good)#@@@@@@@@@
+                a.dict.update({'好评率': good})
             except:
                 pass
         #获取具体评分
@@ -222,6 +284,7 @@ def get_products():
                 for dsr in dsrs:
                     dsr_lis=dsr_lis+dsr.text+','
                 print(dsr_lis)#@@@@@@@@@
+                a.dict.update({'动态评分': dsr_lis})
                 value = False
             except:
                 time.sleep(0.8)
@@ -230,7 +293,14 @@ def get_products():
         #再次初始化list
         shop_lis=''
         style_ads = map_style
+
+        print(a.dict)
         print('=====================================')
+        print('正在写入')
+
+        a.dict.update(a.dict)
+        a.writer_to(a.dict.values())
+        shop_widgets = None
 
 
 
@@ -240,17 +310,34 @@ def main():
     '''
     控制器_抓取内容+翻页
     '''
-    search()
     # 先记录总页数1.先看总页数是否存在 2.记录总页数
-    total = EC_located('.total').text
-    sub_page[0] = int(re.findall('\d+', total)[0])
+    while EC_located('.total') ==None:
+        search()
+        total = EC_located('.total').text
+        sub_page[0] = int(re.findall('\d+', total)[0])
+    #排序方式
+    try:
+        print('1、综合排序 2、销量排序 3、信用排序')
+        zonghe=values(driver_list[0],'.sort-inner .sorts .sort')
+        clik=int(input('请选择排序方式:'))
+        zonghe[clik-1].click()
+        time.sleep(2)
+    except:
+        pass
 
     for i in range(1,  sub_page[0]+ 1):
+        get1=False
         print('当前循环i值是', i)
-        get_products()
+        while get1 == False:
+            try:
+                get_products()
+                get1=True
+            except:
+                get1 = False
+                off_sta()
         next_page()
 
-    input('haha ')
+    input('按回车键结束:')
 
 if __name__ == '__main__':
     main()
