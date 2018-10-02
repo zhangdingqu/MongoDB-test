@@ -6,6 +6,7 @@ MONGO_DB='taobao'
 MONGO_TABLE='product'
 
 url_txt= open('IP_url.txt')
+url_read=url_txt.read()
 KEYWORDS = input('请输入搜索关键词:')
 
 # 保存文件名=input('文件名:')
@@ -39,7 +40,7 @@ class writer():
         self.dict={'标题': '', '链接': '', '服务': '', 'dsr': '', '店铺名': '', '价格': '', '付款人数': '', '发货地': '', '好评率': '', '动态评分': '', '店铺类型': '', '店铺等级': ''}
 
     def get_url(self):
-        self.IP_URL = url_txt.read()
+        self.IP_URL = url_read
         # url_txt.close()
         print(self.IP_URL)
         return self.IP_URL.replace('\n', '')

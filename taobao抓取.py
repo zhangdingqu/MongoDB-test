@@ -240,7 +240,8 @@ def get_products():
                     print(widget_for)
                     if widget_for=='icon-service-qiye-large':
                         a.dict.update({'店铺类型':'企业店铺'})
-                    elif widget_for=='icon-service-tianmao-large':
+                    # elif widget_for=='icon-service-tianmao-large':
+                    elif 'detail.tmall.com' in ctx_box_url:
                         a.dict.update({'店铺类型':'天猫店'})
                     elif widget_for=='icon icon-supple-level-xin':
                         a.dict.update({'店铺等级':str(level)+'心'})
@@ -254,7 +255,7 @@ def get_products():
                     elif widget_for=='icon icon-supple-level-jinguan':
                         a.dict.update({'店铺等级':str(level)+'金冠'})
                         level+=1
-                    elif a.dict['店铺类型']=='':
+                    elif a.dict['店铺类型']=='' and 'detail.tmall.com' not in ctx_box_url:
                         a.dict.update({'店铺类型':'淘宝c店'})
 
                 value = False

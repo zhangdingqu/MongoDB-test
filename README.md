@@ -1,2 +1,2 @@
 # MongoDB-test
-MongoDB test
+## 2018-10-02-10:53修复了抓取店铺类型混乱的错误
