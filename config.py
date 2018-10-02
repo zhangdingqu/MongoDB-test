@@ -49,14 +49,20 @@ class writer():
 
 
     def get_ip(self):
+        global url_txt,url_read
         self.IP1 = str(requests.get(self.get_url()).text)
         self.IP = self.IP1.replace('\r\n', '')
         print('当前获取的IP地址为:', self.IP)
         jiaoyan = re.findall('^\d+.\d+.\d+.\d+:\d+', self.IP)
-        if jiaoyan == []:
-            print(self.IP)
-            while True:
-                winsound.PlaySound("System", winsound.SND_ALIAS)
+        while jiaoyan==[]:
+            winsound.PlaySound("System", winsound.SND_ALIAS)
+            url_txt.close()
+            url_txt = open('IP_url.txt')
+            url_read = url_txt.read()
+            self.IP1 = str(requests.get(self.get_url()).text)
+            self.IP = self.IP1.replace('\r\n', '')
+            print('当前获取的IP地址为:', self.IP)
+            jiaoyan = re.findall('^\d+.\d+.\d+.\d+:\d+', self.IP)
         return self.IP
 
 
