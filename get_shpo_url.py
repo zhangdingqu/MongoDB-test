@@ -60,7 +60,7 @@ class get_shop_url():
         }
         self.csv_writer.writerow(self.dict)
     def EC_located(self,value):
-        wait = WebDriverWait(driver_list[0], 10)
+        wait = WebDriverWait(driver_list[0], 20)
         try:
             ecl = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, value)))
             return ecl
@@ -72,8 +72,16 @@ class get_shop_url():
         if '访问受限' not in driver_list[0].title:
             try:
                 if 'detail.tmall.com' in url:
-                    self.shopname = self.EC_located('.slogo-shopname').text
-                    self.shop_url=self.EC_located('.slogo-shopname').get_attribute('href')
+                    try:
+                        self.shopname = self.EC_located('.slogo-shopname').text
+                        self.shop_url=self.EC_located('.slogo-shopname').get_attribute('href')
+                    except:
+                        if '天猫超市' in driver_list[0].title:
+                            self.shopname = '天猫超市'
+                            self.shop_url='https://chaoshi.detail.tmall.com'
+                        else:
+                            self.shopname = '店名不知道'
+                            self.shop_url = '链接也不知道'
                 elif 'item.taobao.com' in url:
                     try:
                         self.shopname = self.EC_located('.tb-shop-name').text
