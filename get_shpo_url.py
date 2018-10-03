@@ -15,7 +15,7 @@ IP=''
 shop_url=input('请输入shop_url.txt文件的路径').replace('\"','')
 shop_url_txt=open(shop_url)
 KEYWORDS=shop_url.replace('.txt','')
-
+dengdai=int(input('设置等待时间?秒:'))
 def get_ip():
     global IP,url_txt,url_read
     IP1 = str(requests.get(url_read).text)
@@ -60,7 +60,7 @@ class get_shop_url():
         }
         self.csv_writer.writerow(self.dict)
     def EC_located(self,value):
-        wait = WebDriverWait(driver_list[0], 20)
+        wait = WebDriverWait(driver_list[0], dengdai)
         try:
             ecl = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, value)))
             return ecl
@@ -79,7 +79,7 @@ class get_shop_url():
                         if '天猫超市' in driver_list[0].title:
                             self.shopname = '天猫超市'
                             self.shop_url='https://chaoshi.detail.tmall.com'
-                        else:
+                        elif 'tmall.com' not in driver_list[0].title:
                             self.shopname = '店名不知道'
                             self.shop_url = '链接也不知道'
                 elif 'item.taobao.com' in url:

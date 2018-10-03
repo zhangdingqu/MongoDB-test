@@ -24,13 +24,13 @@
         <counts>
           <entry key="Python Console" value="1694" />
           <entry key="dummy" value="18" />
-          <entry key="py" value="7626" />
+          <entry key="py" value="7666" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="18" />
-          <entry key="Python" value="9320" />
+          <entry key="Python" value="9360" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -77,8 +77,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/get_shpo_url.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="529">
-              <caret line="62" column="47" selection-start-line="62" selection-start-column="47" selection-end-line="62" selection-end-column="47" />
+            <state relative-caret-position="690">
+              <caret line="60" column="43" lean-forward="true" selection-start-line="60" selection-start-column="43" selection-end-line="60" selection-end-column="43" />
               <folding>
                 <element signature="e#42#72#0" expanded="true" />
               </folding>
@@ -169,10 +169,10 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
-    <option name="x" value="188" />
-    <option name="y" value="96" />
-    <option name="width" value="2093" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="923" />
+    <option name="y" value="129" />
+    <option name="width" value="1431" />
     <option name="height" value="1167" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -348,10 +348,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="188" y="96" width="2093" height="1167" extended-state="0" />
+    <frame x="923" y="129" width="1431" height="1167" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.07007299" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.10337401" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -528,8 +528,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/get_shpo_url.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="529">
-          <caret line="62" column="47" selection-start-line="62" selection-start-column="47" selection-end-line="62" selection-end-column="47" />
+        <state relative-caret-position="690">
+          <caret line="60" column="43" lean-forward="true" selection-start-line="60" selection-start-column="43" selection-end-line="60" selection-end-column="43" />
           <folding>
             <element signature="e#42#72#0" expanded="true" />
           </folding>
