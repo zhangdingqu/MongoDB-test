@@ -336,10 +336,13 @@ def main():
             except:
                 get1 = False
                 off_sta()
-        next_ajax=EC_located('.item.next a').get_attribute('class')
-        if next_ajax=='J_Ajax num icon-tag':
-            next_page()
-        else:
+        try:
+            if next_ajax=='J_Ajax num icon-tag':
+                next_page()
+            else:
+                break
+        except NoSuchElementException:
+            driver_list[0].close()
             break
 
     input('采集结束，按回车键结束:')
