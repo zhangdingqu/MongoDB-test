@@ -5,7 +5,7 @@ MONGO_URL='localhost'
 MONGO_DB='taobao'
 MONGO_TABLE='product'
 
-url_txt= open('IP_url.txt')
+url_txt= open(input('请输入3-6小时 IP URL.txt文件的路径').replace('\"',''))
 url_read=url_txt.read()
 KEYWORDS = input('请输入搜索关键词:')
 
