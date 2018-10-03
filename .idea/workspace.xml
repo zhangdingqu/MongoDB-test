@@ -20,15 +20,15 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="Python Console" value="1631" />
+          <entry key="Python Console" value="1648" />
           <entry key="dummy" value="18" />
-          <entry key="py" value="6576" />
+          <entry key="py" value="6620" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="18" />
-          <entry key="Python" value="8207" />
+          <entry key="Python" value="8268" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -59,24 +59,24 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/taobao抓取.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="384">
-              <caret line="288" column="29" lean-forward="true" selection-start-line="288" selection-start-column="29" selection-end-line="288" selection-end-column="29" />
+            <state relative-caret-position="811">
+              <caret line="342" column="17" lean-forward="true" selection-start-line="342" selection-start-column="17" selection-end-line="342" selection-end-column="17" />
               <folding>
                 <element signature="e#42#51#0" expanded="true" />
-                <marker date="1538491538493" expanded="true" signature="1313:1314" ph="..." />
+                <marker date="1538533517873" expanded="true" signature="1313:1314" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/config.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="460">
-              <caret line="59" selection-start-line="59" selection-end-line="59" />
+            <state relative-caret-position="197">
+              <caret line="65" selection-start-line="65" selection-end-line="65" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
@@ -144,16 +144,16 @@
         <option value="$PROJECT_DIR$/异常测试.py" />
         <option value="$PROJECT_DIR$/pyquery测试.py" />
         <option value="$PROJECT_DIR$/MongoDB-test.py" />
-        <option value="$PROJECT_DIR$/taobao抓取.py" />
         <option value="$PROJECT_DIR$/config.py" />
+        <option value="$PROJECT_DIR$/taobao抓取.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1174" />
-    <option name="y" value="114" />
-    <option name="width" value="2044" />
-    <option name="height" value="1287" />
+    <option name="x" value="1352" />
+    <option name="y" value="72" />
+    <option name="width" value="1676" />
+    <option name="height" value="1337" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -328,15 +328,16 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1144" y="51" width="2044" height="1287" extended-state="0" />
+    <frame x="833" y="76" width="1676" height="1337" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.071784645" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.08791209" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32957503" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49853158" weight="0.30442324" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.33738074" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.32335827" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -371,11 +372,6 @@
           <option name="timeStamp" value="18" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/taobao抓取.py</url>
-          <line>340</line>
-          <option name="timeStamp" value="27" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/config.py</url>
           <line>75</line>
           <option name="timeStamp" value="53" />
@@ -386,14 +382,9 @@
           <option name="timeStamp" value="83" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/config.py</url>
-          <line>64</line>
-          <option name="timeStamp" value="85" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/config.py</url>
-          <line>54</line>
-          <option name="timeStamp" value="86" />
+          <url>file://$PROJECT_DIR$/taobao抓取.py</url>
+          <line>193</line>
+          <option name="timeStamp" value="88" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -478,23 +469,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/taobao抓取.py">
+    <entry file="file://$PROJECT_DIR$/config.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="384">
-          <caret line="288" column="29" lean-forward="true" selection-start-line="288" selection-start-column="29" selection-end-line="288" selection-end-column="29" />
+        <state relative-caret-position="197">
+          <caret line="65" selection-start-line="65" selection-end-line="65" />
           <folding>
-            <element signature="e#42#51#0" expanded="true" />
-            <marker date="1538491538493" expanded="true" signature="1313:1314" ph="..." />
+            <element signature="e#0#10#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config.py">
+    <entry file="file://$PROJECT_DIR$/taobao抓取.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="460">
-          <caret line="59" selection-start-line="59" selection-end-line="59" />
+        <state relative-caret-position="811">
+          <caret line="342" column="17" lean-forward="true" selection-start-line="342" selection-start-column="17" selection-end-line="342" selection-end-column="17" />
           <folding>
-            <element signature="e#0#10#0" expanded="true" />
+            <element signature="e#42#51#0" expanded="true" />
+            <marker date="1538533517873" expanded="true" signature="1313:1314" ph="..." />
           </folding>
         </state>
       </provider>

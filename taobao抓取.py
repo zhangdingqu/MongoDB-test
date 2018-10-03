@@ -326,7 +326,7 @@ def main():
     except:
         pass
 
-    for i in range(1,  sub_page[0]+ 1):
+    for i in range(0,  sub_page[0]+ 1):
         get1=False
         print('当前循环i值是', i)
         while get1 == False:
@@ -336,9 +336,13 @@ def main():
             except:
                 get1 = False
                 off_sta()
-        next_page()
+        next_ajax=EC_located('.item.next a').get_attribute('class')
+        if next_ajax=='J_Ajax num icon-tag':
+            next_page()
+        else:
+            break
 
-    input('按回车键结束:')
+    input('采集结束，按回车键结束:')
 
 if __name__ == '__main__':
     main()
