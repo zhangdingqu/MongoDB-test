@@ -1,15 +1,29 @@
 import csv
 import requests,re
 import winsound
+import os
+import sys
+
 MONGO_URL='localhost'
 MONGO_DB='taobao'
 MONGO_TABLE='product'
 
 url_txt= open(input('请输入3-6小时 IP URL.txt文件的路径').replace('\"',''))
+# url_txt= open('C:/Users/zhang/Desktop/淘宝选货软件/5-25分钟IP.txt')
+
 url_read=url_txt.read()
 KEYWORDS = input('请输入搜索关键词:')
 
+
+def jwkj_get_filePath_fileName_fileExt(filename):
+  (filepath,tempfilename) = os.path.split(filename);
+  (shotname,extension) = os.path.splitext(tempfilename);
+  return filepath,shotname,extension
+
+path=jwkj_get_filePath_fileName_fileExt(url_txt.name)[0]
+
 # 保存文件名=input('文件名:')
+
 
 
 class writer():
@@ -29,7 +43,7 @@ class writer():
             "店铺类型": "店铺类型",
             "店铺等级": "店铺等级"
         }
-        out = open(KEYWORDS+".csv", 'w', newline='',encoding='utf-8')
+        out = open(path+'\\'+KEYWORDS+".csv", 'w', newline='',encoding='utf-8')
         self.csv_writer = csv.writer(out, dialect='excel')
         print('进入到class 自定义类了..........')
         self.csv_writer.writerow(self.dict)

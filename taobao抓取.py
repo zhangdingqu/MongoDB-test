@@ -15,6 +15,8 @@ IP=a.get_ip()
 
 chromeOptions = webdriver.ChromeOptions()
 chromeOptions.add_argument("--proxy-server=http://"+IP)
+prefs = {'profile.default_content_setting_values': {'images': 2}}
+chromeOptions.add_experimental_option('prefs', prefs)
 
 '''先判断元素是否存在[EC.presence_of_element_located]
    判断元素是否是可点击[EC.element_to_be_clickable]
@@ -34,7 +36,7 @@ def EC_located(value):
         ecl=wait.until(EC.presence_of_element_located((By.CSS_SELECTOR,value)))
         return ecl
     except TimeoutException:
-        print(value,'元素未加载成功，等待超时')
+        print(value,'1元素未加载成功，等待超时')
 
 #是否存在方法
 def values(driver,value):
@@ -43,7 +45,7 @@ def values(driver,value):
         ecl=driver.find_elements(By.CSS_SELECTOR,value)
         return ecl
     except TimeoutException:
-        print(value,'元素未加载成功，等待超时')
+        print(value,'2元素未加载成功，等待超时')
 
 
 # 根据关键字查询初始化
@@ -55,9 +57,16 @@ def search():
     #检查搜索框是不是已经加载出来
     input_search=EC_located('#q')
     while input_search==None:
-        print('网页打开异常,重试..')
-        off_sta()
-        input_search = EC_located('#q')
+        try:
+            print('3网页打开异常,重试..')
+            try:
+                off_sta()
+            except:
+                pass
+            input_search = EC_located('#q')
+        except:
+            input_search = None
+
 
     input_search.send_keys(KEYWORDS)#输入美食
     #检查按钮是否是可点击的
@@ -74,37 +83,46 @@ u_r_l=['1','2']
 sub_page=['1','2']
 def next_page():
     try:
-
         #先记录当前高亮页码
         page[0]=(int(EC_located('.item.active span').text))
         # 检查激活页码下一个是不是已经加载出来
         next = EC_located('.item.active+li>a')
         next.click()
         #检查高亮的页码选项是不是比刚才的+1
-        time.sleep(1)
+        time.sleep(5)
         if next_ok(page[0]) ==True:
             print('ok')
         else:
-            print('翻页失败，正在重试...')
-            off_sta()
+            print('1翻页失败，正在重试...')
+            print('1刷新浏览器')
+            driver_list[0].refresh()
+            time.sleep(5)
+            return next_page()
     except:
-        print(driver_list[0])
-        #IP不能用了的处理办法
-        print('IP不能用了，正在重启浏览器')
-        off_sta()
+        u_r_l[0] = driver_list[0].current_url
+        print('正在访问百度测试网络状况')
+        driver_list[0].get('http://www.baidu.com')
+        if '百度' not in driver_list[0].title:
+            print(driver_list[0])
+            #IP不能用了的处理办法
+            print('IP不能用了，正在重启浏览器')
+            off_sta()
+        else:
+            print('网络是正常的，重新返回淘宝继续翻页。。。')
+            driver_list[0].get(u_r_l[0])
+            return next_page()
 
 def off_sta():
     # 先预先记录本页url地址，以备后面翻页失败后重启调用url
     global IP
     IP = a.get_ip()
-    u_r_l[0] = driver_list[0].current_url
     '''关闭重试'''
     try:
         driver_list[0].close()
     except:
         pass
-    print('正在重启浏览器')
     chromeOptions = webdriver.ChromeOptions()
+    chromeOptions.add_experimental_option('prefs', prefs)
     chromeOptions.add_argument("--proxy-server=http://" + IP)
     driver_list[0] = webdriver.Chrome(chrome_options = chromeOptions)
     driver_list[0].get(u_r_l[0])
@@ -114,7 +132,20 @@ def off_sta():
     elif EC_located('.btn-search') !=None:
         return
     else:
-        off_sta()
+        for rea in range(0,10):
+            print('2刷新浏览器')
+            driver_list[0].refresh()
+            time.sleep(5)
+            if '淘宝' in driver_list[0].title:
+                break
+            else:
+                if rea==3:
+                    print('刷新了4次，浏览器title依旧没有出来 淘宝 字样，貌似这个IP不可用')
+                    off_sta()
+                    break
+
+
+
 
 
 page=['haha','xixi']
@@ -154,6 +185,7 @@ def get_products():
     d_f_e = driver_list[0].find_element
     items=values(driver_list[0],'.grid.g-clearfix .item')
     for i in items:
+        u_r_l[0] = driver_list[0].current_url
         # 提取标题
         title=by_css(i, '.ctx-box a.J_ClickStat').text
         a.dict.update({'标题':title})#@@@@@@@@@@@@@@@@@@@
@@ -206,11 +238,28 @@ def get_products():
         EC_located('.shopname')
         Action(i, '.shopname')
         #获取div style的位置
-        map_style=EC_located('.srp-popup.srp-overlay').get_attribute('style')
-        #获取div盒子的class属性
-        div_class=EC_located('.srp-popup.srp-overlay').get_attribute('class')
-        div_class = EC_located('.srp-popup.srp-overlay').get_attribute('class')
-        #判断盒子正常
+        try:
+            map_style=EC_located('.srp-popup.srp-overlay').get_attribute('style')
+            #获取div盒子的class属性
+            div_class=EC_located('.srp-popup.srp-overlay').get_attribute('class')
+            div_class = EC_located('.srp-popup.srp-overlay').get_attribute('class')
+            #判断盒子正常
+        except:
+            # u_r_l[0] = driver_list[0].current_url
+            print('正在访问百度测试网络状况')
+            driver_list[0].get('http://www.baidu.com')
+            if '百度' not in driver_list[0].title:
+                print(driver_list[0])
+                # IP不能用了的处理办法
+                print('IP不能用了，正在重启浏览器')
+                off_sta()
+            else:
+                print('网络是正常的，重新返回淘宝继续翻页。。。')
+                driver_list[0].get(u_r_l[0])
+                return get_products()
+
+
+
         hz=0
         while 'hidden' in div_class or style_ads==map_style:
             Action(i, '.shopname')
@@ -220,6 +269,7 @@ def get_products():
             hz+=1
             if hz>30:
                 hz=0
+                print('div盒子触摸了30次依旧没有展开')
                 off_sta()
 
         #获取店铺div盒子里面的店铺信息集合
@@ -305,7 +355,7 @@ def get_products():
 
 
 
-
+login=[1,'2']
 def main():
 
     '''
@@ -325,23 +375,46 @@ def main():
         time.sleep(2)
     except:
         pass
-
-    for i in range(0,  sub_page[0]+ 1):
+    next_ajax = ''
+    while 'disabled' not in next_ajax:
         get1=False
-        print('当前循环i值是', i)
         while get1 == False:
             try:
                 get_products()
                 get1=True
             except:
                 get1 = False
-                off_sta()
+                # off_sta()
         try:
-            next_ajax=EC_located('.item.next').get_attribute('class')
-            if 'disabled' not in next_ajax:
-                next_page()
-            else:
-                break
+            if 'login' not in driver_list[0].current_url and '淘宝' in driver_list[0].title:
+                next_ajax=EC_located('.item.next').get_attribute('class')
+                if 'disabled' not in next_ajax:
+                    next_page()
+                else:
+                    break
+            elif 'login' in driver_list[0].current_url:
+                print('出现了login登录界面，正在重新请求网页..')
+                driver_list[0].get(u_r_l[0])
+                time.sleep(2)
+                if login[0]<10:
+                    login[0]+=1
+                    continue
+                else:
+                    off_sta()
+                    continue
+            elif '淘宝' not in driver_list[0].title:
+                print('正在访问百度测试网络状况')
+                driver_list[0].get('http://www.baidu.com')
+                if '百度' not in driver_list[0].title:
+                    print(driver_list[0])
+                    # IP不能用了的处理办法
+                    print('IP不能用了，正在重启浏览器')
+                    off_sta()
+                    continue
+                else:
+                    print('网络是正常的，重新返回淘宝继续翻页。。。')
+                    driver_list[0].get(u_r_l[0])
+                    continue
         except NoSuchElementException:
             driver_list[0].close()
             break
