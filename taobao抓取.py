@@ -337,7 +337,8 @@ def main():
                 get1 = False
                 off_sta()
         try:
-            if next_ajax=='J_Ajax num icon-tag':
+            next_ajax=EC_located('.item.next').get_attribute('class')
+            if 'disabled' not in next_ajax:
                 next_page()
             else:
                 break

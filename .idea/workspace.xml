@@ -25,13 +25,13 @@
         <counts>
           <entry key="Python Console" value="1698" />
           <entry key="dummy" value="18" />
-          <entry key="py" value="8241" />
+          <entry key="py" value="8261" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="18" />
-          <entry key="Python" value="9939" />
+          <entry key="Python" value="9959" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -62,24 +62,24 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/taobao抓取.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6877">
-              <caret line="307" selection-start-line="307" selection-end-line="307" />
+            <state relative-caret-position="186">
+              <caret line="334" column="25" lean-forward="true" selection-start-line="334" selection-start-column="25" selection-end-line="334" selection-end-column="25" />
               <folding>
                 <element signature="e#42#51#0" expanded="true" />
-                <marker date="1538547502585" expanded="true" signature="1313:1314" ph="..." />
+                <marker date="1538621762902" expanded="true" signature="1313:1314" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/get_shpo_url.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="383">
-              <caret line="168" column="34" lean-forward="true" selection-start-line="168" selection-start-column="34" selection-end-line="168" selection-end-column="34" />
+            <state relative-caret-position="176">
+              <caret line="114" column="31" lean-forward="true" selection-start-line="114" selection-start-column="31" selection-end-line="114" selection-end-column="31" />
               <folding>
                 <element signature="e#42#72#0" expanded="true" />
               </folding>
@@ -90,8 +90,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://C:/Anaconda3/Lib/site-packages/selenium/webdriver/remote/errorhandler.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="432">
-              <caret line="240" column="74" lean-forward="true" selection-start-line="240" selection-start-column="74" selection-end-line="240" selection-end-column="74" />
+            <state relative-caret-position="179">
+              <caret line="241" column="45" selection-start-line="241" selection-start-column="45" selection-end-line="241" selection-end-column="45" />
             </state>
           </provider>
         </entry>
@@ -154,6 +154,7 @@
       <find>分类</find>
       <find>shop_url_read</find>
       <find>save_off[0]</find>
+      <find>next_ajax</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -174,16 +175,16 @@
         <option value="$PROJECT_DIR$/pyquery测试.py" />
         <option value="$PROJECT_DIR$/MongoDB-test.py" />
         <option value="$PROJECT_DIR$/临时文件.py" />
-        <option value="$PROJECT_DIR$/taobao抓取.py" />
         <option value="$PROJECT_DIR$/config.py" />
         <option value="$PROJECT_DIR$/get_shpo_url.py" />
+        <option value="$PROJECT_DIR$/taobao抓取.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="475" />
-    <option name="y" value="69" />
-    <option name="width" value="1799" />
+    <option name="x" value="1291" />
+    <option name="y" value="145" />
+    <option name="width" value="1100" />
     <option name="height" value="900" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -222,7 +223,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.get_shpo_url">
+  <component name="RunManager" selected="Python.taobao抓取">
     <configuration name="临时文件" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="MongoDB-test" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -337,8 +338,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.get_shpo_url" />
         <item itemvalue="Python.taobao抓取" />
+        <item itemvalue="Python.get_shpo_url" />
         <item itemvalue="Python.临时文件" />
         <item itemvalue="Python.config" />
         <item itemvalue="Python.suiyin" />
@@ -359,16 +360,16 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="2576" height="1416" extended-state="6" />
+    <frame x="1471" y="221" width="1799" height="900" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.036643025" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.052810904" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32957503" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49853158" weight="0.30287206" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.28237128" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49853158" visible="true" weight="0.30287206" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.47258484" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -424,7 +425,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/taobao抓取.py</url>
-          <line>340</line>
+          <line>341</line>
           <option name="timeStamp" value="90" />
         </line-breakpoint>
       </breakpoints>
@@ -494,17 +495,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/taobao抓取.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6877">
-          <caret line="307" selection-start-line="307" selection-end-line="307" />
-          <folding>
-            <element signature="e#42#51#0" expanded="true" />
-            <marker date="1538547502585" expanded="true" signature="1313:1314" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MongoDB-test.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1610">
@@ -525,19 +515,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://C:/Anaconda3/Lib/site-packages/selenium/webdriver/remote/errorhandler.py">
+    <entry file="file://$PROJECT_DIR$/get_shpo_url.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="240" column="74" lean-forward="true" selection-start-line="240" selection-start-column="74" selection-end-line="240" selection-end-column="74" />
+        <state relative-caret-position="176">
+          <caret line="114" column="31" lean-forward="true" selection-start-line="114" selection-start-column="31" selection-end-line="114" selection-end-column="31" />
+          <folding>
+            <element signature="e#42#72#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/get_shpo_url.py">
+    <entry file="file://C:/Anaconda3/Lib/site-packages/selenium/webdriver/remote/errorhandler.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="383">
-          <caret line="168" column="34" lean-forward="true" selection-start-line="168" selection-start-column="34" selection-end-line="168" selection-end-column="34" />
+        <state relative-caret-position="179">
+          <caret line="241" column="45" selection-start-line="241" selection-start-column="45" selection-end-line="241" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/taobao抓取.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="186">
+          <caret line="334" column="25" lean-forward="true" selection-start-line="334" selection-start-column="25" selection-end-line="334" selection-end-column="25" />
           <folding>
-            <element signature="e#42#72#0" expanded="true" />
+            <element signature="e#42#51#0" expanded="true" />
+            <marker date="1538621762902" expanded="true" signature="1313:1314" ph="..." />
           </folding>
         </state>
       </provider>
