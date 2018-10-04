@@ -5,17 +5,21 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
-import csv,requests,re
+import csv,requests,re,time
 
+save_off=['1','2']
 driver_list=['1','2']
 IP_url=input('请输入5-25分钟 IP URL.txt文件的路径').replace('\"','')
 IP_txt= open(IP_url)
 url_read=IP_txt.read()
+
 IP=''
 shop_url=input('请输入shop_url.txt文件的路径').replace('\"','')
 shop_url_txt=open(shop_url)
 KEYWORDS=shop_url.replace('.txt','')
+out=open(KEYWORDS+'-otu.txt','a+')
 dengdai=int(input('设置等待时间?秒:'))
+qiye=input('这一批里面有没有企业店？关系到加载javascript Y加载js N不加载js Y/N:')
 def get_ip():
     global IP,url_txt,url_read
     IP1 = str(requests.get(url_read).text)
@@ -32,8 +36,10 @@ def get_ip():
         print('当前获取的IP地址为:', IP)
         jiaoyan = re.findall('^\d+.\d+.\d+.\d+:\d+', IP)
 
-
-prefs={'profile.default_content_setting_values': {'images': 2}}
+if qiye=='Y' or qiye=='y':
+    prefs={'profile.default_content_setting_values': {'images': 2}}
+else:
+    prefs = {'profile.default_content_setting_values': {'images': 2,'javascript':2}}
 
 def chrome():
     get_ip()
@@ -46,7 +52,7 @@ def chrome():
     chromeOptions.add_experimental_option('prefs', prefs)
     chromeOptions.add_argument("--proxy-server=http://" + IP)
     driver_list[0] = webdriver.Chrome(chrome_options = chromeOptions)
-
+n=0
 
 class get_shop_url():
     def __init__(self):
@@ -68,8 +74,15 @@ class get_shop_url():
             print(value, '元素未出现，等待超时')
 
     def get(self,url):
-        driver_list[0].get(url)
-        if '访问受限' not in driver_list[0].title:
+        global n,out
+        try:
+            driver_list[0].get(url)
+        except WebDriverException:
+            print('网址有误', url)
+            out.write(url)
+            print('写入到日志')
+            return
+        if '访问受限' not in driver_list[0].title or '淘宝'  in driver_list[0].title or '天猫' in driver_list[0].title:
             try:
                 if 'detail.tmall.com' in url:
                     try:
@@ -84,22 +97,57 @@ class get_shop_url():
                             self.shop_url = '链接也不知道'
                 elif 'item.taobao.com' in url:
                     try:
-                        self.shopname = self.EC_located('.tb-shop-name').text
-                        self.shop_url = self.EC_located('.tb-shop-name a').get_attribute('href')
-                    except AttributeError:
+
                         self.shopname = self.EC_located('.shop-name-link').text
                         self.shop_url = self.EC_located('.shop-name-link').get_attribute('href')
+                    except AttributeError:
+                        self.shopname = self.EC_located('.tb-shop-name').text
+                        self.shop_url = self.EC_located('.tb-shop-name a').get_attribute('href')
+
                 self.dict.update({
                     '商品链接':url,
                     '店铺名':self.shopname,
-                    '店铺网址':self.shop_url
+                    '店铺网址':str(self.shop_url)+'search.htm?'
                                 })
+
+
             except AttributeError:
-                print('换3分钟IP后重试...')
-                chrome()
+                print('1重试...')
+                if driver_list[0].current_url == url.replace('\n', '') and 'detail.tmall.com' not in driver_list[0].title and 'item.taobao.com' not in driver_list[0].title:
+
+                    if n < 5:
+
+                        n += 1
+                        # chrome()
+                        return self.get(url)
+                    else:
+                        n = 0
+
+                        print('放弃', url)
+                        out.write(url)
+                        print('写入到日志')
+                        return
+                elif '淘宝' not in driver_list[0].title and '天猫' not in driver_list[0].title:
+
+                    chrome()
+                    return self.get(url)
+
+        elif '访问受限' in driver_list[0].title:
+            print('访问受限，等待5秒再重新get网址...')
+            time.sleep(5)
+            if n<5:
+                n += 1
                 return self.get(url)
-        else:
-            print('换3分钟IP后重试...')
+            else:
+                print('2重试...')
+                n=0
+
+                print('放弃',url)
+                out.write(url)
+                print('写入到日志')
+                return
+        elif '淘宝' not in driver_list[0].title and '天猫' not in driver_list[0].title:
+
             chrome()
             return self.get(url)
 
@@ -114,10 +162,17 @@ def main():
     a=get_shop_url()
     shop_url_read='ha'
     while shop_url_read !='':
+
         shop_url_read = shop_url_txt.readline()
-        if shop_url_read!='':
+        if 'http' in shop_url_read:
             a.get(shop_url_read)
-            a.save()
+            if a.dict['店铺名'] !='':
+                a.save()
+                a.dict.update({
+                    '商品链接':'',
+                    '店铺名':'',
+                    '店铺网址':''})
+
     print('采集完成...')
 
 
@@ -125,4 +180,5 @@ def main():
 if __name__ == '__main__':
     input('IP_url.txt请使用3-5分钟有效IP，否则会很费钱哦！...')
     main()
+    out.close()
     driver_list[0].close()
